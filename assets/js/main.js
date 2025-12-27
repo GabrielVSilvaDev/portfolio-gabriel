@@ -44,8 +44,37 @@ const shadowHeader = () =>{
 window.addEventListener('scroll', shadowHeader)
 
 /*=============== CONTACT EMAIL JS ===============*/ 
+const contactForm = document.getElementById('contact-form'),
+      contactMessage = document.getElementById('contact-message');
 
+const sendEmail = (e) => {
+    e.preventDefault();
 
+    emailjs.sendForm(
+        'serce_yvec739',
+        'template_ndj67kl',
+        '#contact-form',
+        'aHKR0KHpw6dQqq6du'
+    )
+    .then(() => {
+        contactMessage.textContent = 'Message sent successfully ✅'
+
+        setTimeout(() => {
+            contactMessage.textContent = ''
+        }, 5000)
+
+        contactForm.reset() 
+    })
+    .catch(() => {
+        contactMessage.textContent = 'Message not sent (service error) ❌';
+        setTimeout(() => {
+            contactMessage.textContent = ''
+        }, 8000)
+    }); 
+}
+if(contactForm) {
+    contactForm.addEventListener('submit', sendEmail);
+}
 /*=============== SHOW SCROLL UP ===============*/ 
 
 

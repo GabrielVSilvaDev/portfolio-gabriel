@@ -84,6 +84,37 @@ const scrollUp = () => {
 window.addEventListener('scroll', scrollUp);
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+const sections = document.querySelectorAll('section[id]')
 
+const scrollActive = () => {
+    const scrollDown = window.scrollY
+    
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight,
+            sectionTop = current.offsetTop - 58,
+            sectionId = current.getAttribute('id'),
+            sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+        if (scrollDown >= sectionTop && scrollDown < sectionTop + sectionHeight - 1){
+            sectionsClass.classList.add('active-link')
+        } else {
+            sectionsClass.classList.remove('active-link')
+        }
+    })
+}
+window.addEventListener('scroll', scrollActive)
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 2000,
+    // reset: true, // Animations repeat
+})
+
+sr.reveal(`.home__content, .footer__container`)
+sr.reveal(`.home__data`, {delay: 300,  origin: 'bottom'})
+
+sr.reveal(`.about__content, .contact__container`, {origin: 'bottom'})
+sr.reveal(`.about__image, .contact__form`, {delay: 300})
+
+sr.reveal(`.projects__card`, {interval: 100})

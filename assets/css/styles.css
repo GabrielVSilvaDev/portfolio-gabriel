@@ -5,17 +5,9 @@
 :root {
   --header-height: 3.5rem;
 
-  /*========== Colors ==========*/
-  /* 
-    Color mode HSL(hue, saturation, lightness)
-      Default Cyan: hsl(180, 80%, 48%)
-      Blue: hsl(220, 90%, 64%) - Pink: hsl(300, 70%, 64%)
-      Green: hsl(110, 70%, 64%) - Purple: hsl(255, 70%, 64%)
-      Orange: hsl(15, 80%, 64%) - Red: hsl(358, 80%, 64%)
-  */
-
-  --hue: 180;
-  --first-color: hsl(var(--hue), 80%, 48%);
+  /* Colors */
+  --hue: 230;
+  --first-color: hsl(var(--hue), 80%, 60%);
   --first-color-alt: hsl(var(--hue), 80%, 44%);
   --white-color: hsl(var(--hue), 8%, 92%);
   --black-color: hsl(var(--hue), 4%, 8%);
@@ -115,6 +107,8 @@ img {
 
 .section {
   padding-block: 5rem 1rem;
+  /* ensure anchor scrolling accounts for fixed header */
+  scroll-margin-top: calc(var(--header-height) + 0.5rem);
 }
 
 .section__title {
@@ -199,7 +193,8 @@ img {
   position: absolute;
   left: 0;
   bottom: -.5rem;
-  transition: width .4s;
+  /* smoother and nicer easing for underline changes */
+  transition: width .35s ease, background-color .35s ease;
 }
 
 .nav__link:hover{
@@ -227,6 +222,9 @@ img {
 }
 
 /* Active link */
+.active-link::after{
+  width: 60%;
+}
 
 
 /*=============== HOME ===============*/
@@ -406,6 +404,8 @@ img {
 /*=============== PROJECTS ===============*/
 .projects__container{
   row-gap: 2rem;
+  /* avoid sections touching visually and reduce activation overlap */
+  padding-bottom: 3rem;
 }
 
 .projects__card{
@@ -873,6 +873,10 @@ img {
   .footer__social{
     justify-self: flex-end;
   }
+}
+
+.scrollUp{
+  right: 3rem;
 }
 
 @media screen and (min-width: 2048px){
